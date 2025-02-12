@@ -1,28 +1,21 @@
--- Création de la base de données
-CREATE DATABASE guess_lol_champs;
-USE guess_lol_champs;
-
--- Table des champions
 CREATE TABLE champions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
     image_url VARCHAR(255) NOT NULL
 );
 
--- Table des utilisateurs
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    best_time INT DEFAULT NULL 
+    best_time INT DEFAULT NULL ,
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
--- Table des scores (historique des parties)
 CREATE TABLE scores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    time_taken INT NOT NULL, -- Temps en secondes
+    time_taken INT NOT NULL,
     played_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -111,6 +104,7 @@ VALUES
 ('Lulu', 'https://guesschamp.com/lol/lulu.jpg'),
 ('Lux', 'https://guesschamp.com/lol/lux.jpg'),
 ('Malphite', 'https://guesschamp.com/lol/malphite.jpg'),
+('Malzahar', 'https://guesschamp.com/lol/malzahar.jpg'),
 ('Maokai', 'https://guesschamp.com/lol/maokai.jpg'),
 ('Master Yi', 'https://guesschamp.com/lol/masterYi.jpg'),
 ('Mel', 'https://guesschamp.com/lol/mel.jpg'),
@@ -138,8 +132,10 @@ VALUES
 ('Rakan', 'https://guesschamp.com/lol/rakan.jpg'),
 ('Rammus', 'https://guesschamp.com/lol/rammus.jpg'),
 ('Rek\'Sai', 'https://guesschamp.com/lol/reksai.jpg'),
+('Rell', 'https://guesschamp.com/lol/rell.jpg'),
 ('Renata', 'https://guesschamp.com/lol/renata.jpg'),
 ('Renekton', 'https://guesschamp.com/lol/renekton.jpg'),
+('Rengar', 'https://guesschamp.com/lol/rengar.jpg'),
 ('Riven', 'https://guesschamp.com/lol/riven.jpg'),
 ('Rumble', 'https://guesschamp.com/lol/rumble.jpg'),
 ('Ryze', 'https://guesschamp.com/lol/ryze.jpg'),
@@ -150,19 +146,26 @@ VALUES
 ('Sett', 'https://guesschamp.com/lol/sett.jpg'),
 ('Shaco', 'https://guesschamp.com/lol/shaco.jpg'),
 ('Shen', 'https://guesschamp.com/lol/shen.jpg'),
+('Shyvana', 'https://guesschamp.com/lol/shyvana.jpg'),
 ('Singed', 'https://guesschamp.com/lol/singed.jpg'),
 ('Sion', 'https://guesschamp.com/lol/sion.jpg'),
 ('Sivir', 'https://guesschamp.com/lol/sivir.jpg'),
 ('Skarner', 'https://guesschamp.com/lol/skarner.jpg'),
+('Smolder', 'https://guesschamp.com/lol/smolder.jpg'),
+('Sona', 'https://guesschamp.com/lol/sona.jpg'),
+('Soraka', 'https://guesschamp.com/lol/soraka.jpg'),
 ('Swain', 'https://guesschamp.com/lol/swain.jpg'),
 ('Sylas', 'https://guesschamp.com/lol/sylas.jpg'),
 ('Syndra', 'https://guesschamp.com/lol/syndra.jpg'),
 ('Tahm Kench', 'https://guesschamp.com/lol/tahmkench.jpg'),
 ('Taliyah', 'https://guesschamp.com/lol/taliyah.jpg'),
+('Talon', 'https://guesschamp.com/lol/talon.jpg'),
+('Taric', 'https://guesschamp.com/lol/taric.jpg'),
 ('Teemo', 'https://guesschamp.com/lol/teemo.jpg'),
 ('Thresh', 'https://guesschamp.com/lol/thresh.jpg'),
 ('Tristana', 'https://guesschamp.com/lol/tristana.jpg'),
 ('Trundle', 'https://guesschamp.com/lol/trundle.jpg'),
+('Tryndamere', 'https://guesschamp.com/lol/tryndamere.jpg'),
 ('Twisted Fate', 'https://guesschamp.com/lol/twistedfate.jpg'),
 ('Twitch', 'https://guesschamp.com/lol/twitch.jpg'),
 ('Udyr', 'https://guesschamp.com/lol/udyr.jpg'),
@@ -181,6 +184,10 @@ VALUES
 ('Wukong', 'https://guesschamp.com/lol/wukong.jpg'),
 ('Xayah', 'https://guesschamp.com/lol/xayah.jpg'),
 ('Xerath', 'https://guesschamp.com/lol/xerath.jpg'),
+('Xin Zhao', 'https://guesschamp.com/lol/xinzhao.jpg'),
+('Yasuo', 'https://guesschamp.com/lol/yasuo.jpg'),
+('Yone', 'https://guesschamp.com/lol/yone.jpg'),
+('Yorick', 'https://guesschamp.com/lol/yorick.jpg'),
 ('Yuumi', 'https://guesschamp.com/lol/yuumi.jpg'),
 ('Zac', 'https://guesschamp.com/lol/zac.jpg'),
 ('Zed', 'https://guesschamp.com/lol/zed.jpg'),
