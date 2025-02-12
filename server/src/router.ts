@@ -16,19 +16,19 @@ router.delete("/api/users/:id", usersActions.destroy);
 // Scores-related routes
 import scoreActions from "./modules/scores/scoreActions";
 
-router.get("/api/score", scoreActions.browse);
-router.put("/api/score/:id", scoreActions.edit);
-router.post("/api/score", scoreActions.add);
+router.get("/api/scores", scoreActions.browse);
+router.put("/api/scores/:id", scoreActions.edit);
+router.post("/api/scores", scoreActions.add);
 
 /* ************************************************************************* */
 
 // Champions-related routes
 import championActions from "./modules/champions/championActions";
 
-router.get("/api/champion", championActions.browse);
-router.put("/api/champion/:id", championActions.edit);
-router.post("/api/champion", championActions.add);
-router.post("/api/champion/:id", championActions.add);
+router.get("/api/champions", championActions.browse);
+router.put("/api/champions/:id", championActions.edit);
+router.post("/api/champions", championActions.add);
+router.delete("/api/champions/:id", championActions.destroy);
 
 /* ************************************************************************* */
 

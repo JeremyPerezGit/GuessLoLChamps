@@ -49,20 +49,21 @@ const edit: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const newUser = {
-      id: Number(req.params.id),
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    };
+    const { username, email, password } = req.body;
 
-    const insertId = await userRepository.create(newUser.username);
+    if (!username || !email || !password) {
+      res.status(400).json({ message: "Tous les champs sont requis." });
+      return;
+    }
 
-    res.status(204).json({ insertId });
+    const newUser = await userRepository.create({ username, email, password });
+    res.status(201).json(newUser);
+    return;
   } catch (err) {
     next(err);
   }
 };
+
 const destroy: RequestHandler = async (req, res, next) => {
   try {
     const userId = Number(req.params.id);

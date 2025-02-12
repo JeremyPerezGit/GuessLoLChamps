@@ -13,15 +13,15 @@ const browse: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const newChampion = {
-      id: Number(req.params.id),
-      name: req.body.name,
-      image_url: req.body.image_url,
-    };
+    const { name, image_url } = req.body;
 
-    const insertId = await championRepository.create(newChampion.name);
+    if (!name || !image_url) {
+      res.status(400).json({ message: "Tous les champs sont requis." });
+      return;
+    }
 
-    res.status(204).json({ insertId });
+    const newChampion = await championRepository.create({ name, image_url });
+    res.status(201).json(newChampion);
   } catch (err) {
     next(err);
   }

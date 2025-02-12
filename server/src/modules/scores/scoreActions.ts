@@ -13,14 +13,18 @@ const browse: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const newScore = {
-      id: Number(req.params.id),
-      user_id: req.body.user_id,
-      time_taken: req.body.time_taken,
-      played_at: req.body.played_at,
-    };
+    const { user_id, time_taken } = req.body;
 
-    const insertId = await scoreRepository.create(newScore.user_id);
+    if (!user_id || !time_taken) {
+      res.status(400).json({ message: "Tous les champs sont requis." });
+      return;
+    }
+
+    const insertId = await scoreRepository.create({
+      user_id,
+      time_taken,
+      played_at: new Date().toISOString(),
+    });
 
     res.status(204).json({ insertId });
   } catch (err) {
@@ -32,16 +36,12 @@ const edit: RequestHandler = async (req, res, next) => {
   try {
     const score = {
       id: Number(req.params.id),
-      user_id: req.body.user_id,
       time_taken: req.body.time_taken,
-      played_at: req.body.played_at,
     };
 
     const affectedRows = await scoreRepository.update(
       score.id,
-      score.user_id,
       score.time_taken,
-      score.played_at,
     );
 
     if (affectedRows === 0) {

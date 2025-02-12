@@ -8,7 +8,7 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     best_time INT DEFAULT NULL ,
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -21,10 +21,20 @@ CREATE TABLE scores (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-INSERT INTO users (id, username, password_hash, is_admin)
-VALUES
-(1, "Pepe", "123", true);
 
+INSERT INTO users (id, username, email, password, is_admin)
+VALUES
+(1, "Pepe", "pepe@gmail.com", "123", true),
+(2, "Pepe2", "pepe2@gmail.com", "123", false);
+
+INSERT INTO scores (user_id, time_taken)
+VALUES
+(1, 10),
+(1, 20),
+(1, 30),
+(2, 10),
+(2, 20),
+(2, 30);
 INSERT INTO champions (name, image_url)
 VALUES
 ('Aatrox', 'https://guesschamp.com/lol/aatrox.jpg'),

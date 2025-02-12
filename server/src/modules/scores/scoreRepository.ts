@@ -11,9 +11,9 @@ type Scores = {
 class ScoreRepository {
   async create(scores: Omit<Scores, "id">): Promise<number> {
     const [result] = await databaseClient.query<Result>(
-      `INSERT INTO scores (user_id, time_taken, played_at)
-             VALUES (?, ?, ?)`,
-      [scores.user_id, scores.time_taken, scores.played_at],
+      `INSERT INTO scores (user_id, time_taken)
+             VALUES (?, ?)`,
+      [scores.user_id, scores.time_taken],
     );
 
     return result.insertId;
@@ -27,17 +27,12 @@ class ScoreRepository {
     return rows as Scores[];
   }
 
-  async update(
-    id: number,
-    user_id: number,
-    time_taken: number,
-    played_at: string,
-  ): Promise<number> {
+  async update(id: number, time_taken: number): Promise<number> {
     const [result] = await databaseClient.query<Result>(
       `UPDATE scores 
-          SET time_taken = ?, played_at = ? 
+          SET time_taken = ?
           WHERE id = ?`,
-      [time_taken, played_at, id],
+      [time_taken, id],
     );
 
     return result.affectedRows;
